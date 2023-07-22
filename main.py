@@ -1,6 +1,11 @@
 from Insurance.logger import logging
 from Insurance.exception import InsuranceException
 import os,sys
+from warnings import filterwarnings
+filterwarnings('ignore')
+import sys
+print(dir(sys))
+
 
 def test_logger_and_exception():
     try:
@@ -14,9 +19,9 @@ def test_logger_and_exception():
         logging.debug(str(e))
         raise InsuranceException(e,sys)
     
-    
-    if __name__ =='__main__':
-        try:
-            test_logger_and_exception()
-        except Exception as e:
-            print(e)
+
+if __name__ =='__main__':
+    try:
+        test_logger_and_exception()
+    except Exception as e:
+        print(e)
