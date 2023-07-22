@@ -1,4 +1,11 @@
 pandas 
 numpy
+python-dotenv
 pymongo
+pytz
+python-dateutil
 -e .
+
+
+
+

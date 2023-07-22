@@ -1,15 +1,19 @@
 import pymongo 
 import pandas as pd
 import json 
+import os
 
+from dotenv import load_dotenv
+MONGO_DB_URL = os.getenv("MONGO_DB_URL")
 
-client = pymongo.MongoClient("mongodb+srv://hugar_rajesh:Rajesh_0808@rajesh.ud2bw.mongodb.net/?retryWrites=true&w=majority")
+client = pymongo.MongoClient(MONGO_DB_URL)
 
+DATA_FILE_PATH ='insurance.csv'
 DATABASE='INSURANCE'
 COLLECTION_NAME='INSURANCE_PROJECT'
 
 if __name__ =="__main__":
-    df=pd.read_csv('insurance.csv')
+    df=pd.read_csv(DATA_FILE_PATH)
     print(f'Rows and columns :{df.shape}')
     
     df.reset_index(drop=True,inplace=True)
