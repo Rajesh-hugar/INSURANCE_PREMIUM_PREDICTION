@@ -1,6 +1,7 @@
 import os ,sys
 from Insurance.exception import InsuranceException
 from Insurance.logger import logging
+from Insurance.config import TARGET_COLUMN
 
 from datetime import datetime
 FILE_NAME='insurance.csv'
@@ -40,7 +41,12 @@ class DataIngestionConfig():
         
         
         
-class DataValidation:
-    pass
-
+class DataValidationConfig:
+    
+    
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.data_validation_dir = os.path.join(training_pipeline_config.artifact_dir,"data_validation")
+        self.report_file_path = os.path.join(self.data_validation_dir,'report.yaml')#json,csv,yaml
+        self.missing_threshold:float = 0.2
+        self.base_file_path = os.path.join(r'insurance.csv')
 
