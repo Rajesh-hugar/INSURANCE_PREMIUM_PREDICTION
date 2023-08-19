@@ -48,3 +48,37 @@ def write_yaml_file(file_path,data:dict):
 
     
     
+def save_object(file_path:str,obj:object)->None:
+    
+    try:
+        os.mkdirs(os.path.dirname(file_path,exist_ok=True))
+        with open(file_path,"wb") as file_obj:
+            dill.dump(obj,file_obj)
+    
+    except Exception as e:
+        raise InsuranceException(e ,sys )
+    
+    
+    
+def load_object(file_path:str,obj:object) -> object:
+    
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(f'The file: {file_path} is not available')
+        with open(file_path,'rb') as file_obj:
+            return dill.open(object,file_obj)
+        
+        
+        
+    except Exception as e:
+        raise InsuranceException(e ,sys )
+    
+    
+    
+    
+       
+    try:
+        pass
+    except Exception as e:
+        raise InsuranceException(e ,sys )
+    
