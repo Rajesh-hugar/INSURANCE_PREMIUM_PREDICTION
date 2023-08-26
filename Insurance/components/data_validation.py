@@ -58,7 +58,7 @@ class DataValidation:
     #     print("dsgfg")
     def is_required_columns_exists(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str)->bool:
         try:
-            
+           
             base_columns = base_df.columns
             current_columns = current_df.columns
 
@@ -143,14 +143,14 @@ class DataValidation:
             if test_df_columns_status:
                 logging.info(f"As all column are available in test df hence detecting data drift")
                 self.data_drift(base_df=base_df, current_df=test_df,report_key_name="data_drift_within_test_dataset")
-                
+          
             #write the report
-            logging.info("Write report in yaml file")
-            utils.write_yaml_file(self.data_validation_config.report_file_path,
+            logging.info("Write reprt in yaml file")
+            utils.write_yaml_file(file_path=self.data_validation_config.report_file_path,
             data=self.validation_error)
 
             data_validation_artifact = artifact_entity.DataValidationArtifact(report_file_path=self.data_validation_config.report_file_path,)
-            logging.info(f"Data validation artifact : {data_validation_artifact}")
+            logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact
         except Exception as e:
             raise InsuranceException(e, sys)
