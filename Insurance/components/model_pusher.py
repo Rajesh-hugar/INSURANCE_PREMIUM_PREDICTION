@@ -20,7 +20,7 @@ class ModelPusher:
         except Exception as e:
             raise InsuranceException(e, sys)
 
-    def initiate_model_pusher(self,)->ModelPusherArtifact:
+    def initiate_model_pusher(self)->ModelPusherArtifact:
         try:
             #load object
             logging.info(f"Loading transformer model and target encoder")
