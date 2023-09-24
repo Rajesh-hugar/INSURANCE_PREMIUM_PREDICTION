@@ -1,16 +1,15 @@
 from Insurance.logger import logging
 from Insurance.exception import InsuranceException
-import os,sys
-from warnings import filterwarnings
-filterwarnings('ignore')
-import sys
+from Insurance.utils import get_collection_as_dataframe
+import sys, os
 from Insurance.entity.config_entity import DataIngestionConfig
 from Insurance.entity import config_entity
 from Insurance.components.data_ingestion import DataIngestion
 from Insurance.components.data_validation import DataValidation
 from Insurance.components.data_transformation import DataTransformation
 from Insurance.components.model_trainer import ModelTrainer
-#print(dir(sys))
+from Insurance.components.model_evaluation import ModelEvaluation
+from Insurance.components.model_pusher import ModelPusher
 
 from Insurance.components.model_evaluation import ModelEvaluation
 
@@ -70,6 +69,12 @@ if __name__ =='__main__':
         model_eval = ModelEvaluation(model_eval_config=model_eval_config,data_ingestion_artifact=data_ingestion_artifact,data_transformation_artifact=data_transformation_artifact,model_trainer_artifact=model_trainer_artifact)
         model_eval_artifact =model_eval.initiate_model_evaluation()
         
-        
+        # model pusher
+        model_pusher_config = config_entity.ModelPusherConfig(training_pipeline_config=training_pipeline_config)
+        model_pusher = ModelPusher(model_pusher_config=model_pusher_config,
+                                     data_transformation_artifact=data_transformation_artifact,
+                                     model_trainer_artifact=model_trainer_artifact)
+        model_pusher_artifact = model_pusher.initiate_model_pusher()
+
     except Exception as e:
         raise InsuranceException(e,sys)

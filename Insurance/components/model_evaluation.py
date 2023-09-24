@@ -37,6 +37,13 @@ class ModelEvaluation:
                 logging.info(f"Model Evaluation artifact: {model_eval_artifact}")
                 
                 return model_eval_artifact 
+            
+            
+            
+            # Find location previous model
+            transformer_path = self.modelResolver.get_latest_transformer_path()
+            model_path = self.modelResolver.get_latest_model_path()
+            target_encoder_path = self.modelResolver.get_latest_target_encoder_path()
         except Exception as e:
             raise InsuranceException(e,sys)
         
